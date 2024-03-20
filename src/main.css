@@ -1,0 +1,102 @@
+@import "blink.css";
+
+:root {
+  font-family: "Comic Sans MS", sans-serif;
+  line-height: 1.4;
+  font-weight: 400;
+
+  color: white;
+  background: url("https://i.imgur.com/SHZe50s.gif") fixed;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+table {
+  margin: 0 auto;
+}
+
+.rainbow {
+  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* PokemonDetails.css */
+.pokemon-details {
+  max-width: 800px;
+  margin: 4rem auto;
+  color: black;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pokemon-name {
+  margin: 0;
+}
+
+.pokemon-sprite {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+}
+
+.pokemon-info {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pokemon-info div {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-stats {
+  margin-top: 20px;
+}
+
+.pokemon-types {
+  display: flex;
+  gap: 10px;
+}
+
+.pokemon-details ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pokemon-types li {
+  background-color: gray;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #007bff;
+  text-decoration: none;
+}
