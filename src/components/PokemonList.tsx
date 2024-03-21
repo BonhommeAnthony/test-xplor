@@ -61,7 +61,7 @@ export default function PokemonList() {
           </tbody>
         </table>
       )}
-      <div className="loadMoreButton">
+      <div>
         {shouldShowLoadMoreButton && (
           <button className="load-more-button" onClick={handleLoadMore}>
             {isFetching ? "Loading..." : "Load More"}
