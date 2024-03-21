@@ -33,6 +33,10 @@ export default function PokemonList() {
     [loadedItems, debouncedSearchTerm]
   );
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
   const handleLoadMore = () => setLoadedItems(loadedItems + 20);
   const shouldShowLoadMoreButton = pokemon && pokemon.results.length < pokemon.count;
   return (
@@ -42,7 +46,7 @@ export default function PokemonList() {
         type="text"
         placeholder="Search Pokémon"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearchChange}
       />
       {error && <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>}{" "}
       {pokemon && (
