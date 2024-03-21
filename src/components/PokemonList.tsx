@@ -13,6 +13,7 @@ export default function PokemonList() {
   const {
     data: pokemon,
     isLoading,
+    isFetching,
     error,
   } = usePokeApi(
     async (api) => {
@@ -39,6 +40,7 @@ export default function PokemonList() {
 
   const handleLoadMore = () => setLoadedItems(loadedItems + 20);
   const shouldShowLoadMoreButton = pokemon && pokemon.results.length < pokemon.count;
+
   return (
     <>
       <input
@@ -48,6 +50,7 @@ export default function PokemonList() {
         value={searchTerm}
         onChange={handleSearchChange}
       />
+      {isLoading && <div>Loading...</div>}
       {error && <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>}{" "}
       {pokemon && (
         <table border={1} className="pokemon-table">
@@ -58,22 +61,10 @@ export default function PokemonList() {
           </tbody>
         </table>
       )}
-      {isLoading && <div>Loading...</div>}
       <div className="loadMoreButton">
         {shouldShowLoadMoreButton && (
-          <button
-            style={{
-              padding: "0.5em 1em",
-              borderRadius: "0.5em",
-              border: "none",
-              backgroundColor: "#f0f0f0",
-              color: "#333",
-              fontSize: "1em",
-              marginTop: "1em",
-            }}
-            onClick={handleLoadMore}
-          >
-            Load More
+          <button className="load-more-button" onClick={handleLoadMore}>
+            {isFetching ? "Loading..." : "Load More"}
           </button>
         )}
       </div>

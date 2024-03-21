@@ -1,5 +1,5 @@
 import { Pokemon, PokemonSpecies } from "pokenode-ts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import usePokeApi, { getLocalizedName } from "src/hooks/usePokeApi";
 
 interface PokemonProps {
@@ -7,12 +7,21 @@ interface PokemonProps {
 }
 
 export default function PokemonRow({ pokemon }: PokemonProps): JSX.Element {
+  const navigate = useNavigate();
+
   const { data: species } = usePokeApi((api) => api.utility.getResourceByUrl<PokemonSpecies>(pokemon.species.url));
 
   const pokedexNumber = species?.pokedex_numbers.find((pokedex) => pokedex.pokedex.name === "national")?.entry_number;
 
+  const handleRowClick = (e: any) => {
+    e.preventDefault();
+    if (species) {
+      navigate(`/pokemon/${species.id}`);
+    }
+  };
+
   return species ? (
-    <tr>
+    <tr onClick={handleRowClick}>
       <td width="1">{pokedexNumber}</td>
       <td width="1">
         <img
@@ -32,6 +41,7 @@ export default function PokemonRow({ pokemon }: PokemonProps): JSX.Element {
         >
           {pokemon.types.map((type) => (
             <span
+              key={type.slot}
               style={{
                 padding: "0.25em 0.5em",
                 borderRadius: "0.5em",

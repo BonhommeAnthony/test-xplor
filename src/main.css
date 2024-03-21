@@ -52,16 +52,22 @@ table {
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
 
-/* .pokemon-table {
-  margin: 0 auto;
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 800px;
-  background: #fff;
-  color: black;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
+.load-more-button {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.load-more-button:hover {
+  background-color: #0056b3;
+}
 
 .pokemon-table {
   width: 800px;
