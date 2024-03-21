@@ -10,7 +10,6 @@ export default function PokemonRow({ pokemon }: PokemonProps): JSX.Element {
   const { data: species } = usePokeApi((api) => api.utility.getResourceByUrl<PokemonSpecies>(pokemon.species.url));
 
   const pokedexNumber = species?.pokedex_numbers.find((pokedex) => pokedex.pokedex.name === "national")?.entry_number;
-  const allNames = species?.names.map((name) => name.name).join("/ ");
 
   return species ? (
     <tr>
