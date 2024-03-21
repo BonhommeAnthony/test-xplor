@@ -6,8 +6,7 @@ import PokemonRow from "./PokemonRow";
 
 export default function PokemonList() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
+  const [loadedItems, setLoadedItems] = useState(20);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
@@ -17,39 +16,37 @@ export default function PokemonList() {
     error,
   } = usePokeApi(
     async (api) => {
-      if (!searchTerm) {
-        const offset = currentPage * itemsPerPage;
-        const list = await api.pokemon.listPokemons(offset, itemsPerPage);
+      const offset = 0;
+      if (!debouncedSearchTerm) {
+        const list = await api.pokemon.listPokemons(offset, loadedItems);
         return resolveResources<Pokemon>(list);
       } else {
         try {
-          const pokemon = await api.pokemon.getPokemonByName(searchTerm.toLowerCase());
+          const pokemon = await api.pokemon.getPokemonByName(debouncedSearchTerm.toLowerCase());
           return { results: [pokemon], count: 1 };
         } catch (error) {
           throw new Error("Failed to fetch Pokémon");
         }
       }
     },
-    {},
-    [currentPage, debouncedSearchTerm]
+    { keepPreviousData: true },
+    [loadedItems, debouncedSearchTerm]
   );
 
-  const goToNextPage = () => setCurrentPage(currentPage + 1);
-  const goToPreviousPage = () => setCurrentPage(currentPage - 1);
-
+  const handleLoadMore = () => setLoadedItems(loadedItems + 20);
+  const shouldShowLoadMoreButton = pokemon && pokemon.results.length < pokemon.count;
   return (
     <>
       <input
-        style={{ marginBottom: "1rem" }}
+        className="search-input"
         type="text"
         placeholder="Search Pokémon"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      {isLoading && <div>Loading...</div>}
-      {error && <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>}
+      {error && <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>}{" "}
       {pokemon && (
-        <table border={1} style={{ background: "white", color: "blue", width: 800 }}>
+        <table border={1} className="pokemon-table">
           <tbody>
             {pokemon.results.map((p) => (
               <PokemonRow key={p.id} pokemon={p} />
@@ -57,16 +54,24 @@ export default function PokemonList() {
           </tbody>
         </table>
       )}
-      <div>
-        {currentPage > 0 && <button onClick={goToPreviousPage}>Previous</button>}
-        <button
-          onClick={goToNextPage}
-          style={{
-            marginLeft: "1rem",
-          }}
-        >
-          Next
-        </button>
+      {isLoading && <div>Loading...</div>}
+      <div className="loadMoreButton">
+        {shouldShowLoadMoreButton && (
+          <button
+            style={{
+              padding: "0.5em 1em",
+              borderRadius: "0.5em",
+              border: "none",
+              backgroundColor: "#f0f0f0",
+              color: "#333",
+              fontSize: "1em",
+              marginTop: "1em",
+            }}
+            onClick={handleLoadMore}
+          >
+            Load More
+          </button>
+        )}
       </div>
     </>
   );

@@ -20,6 +20,7 @@ body {
   text-align: center;
   min-width: 320px;
   min-height: 100vh;
+  color: black;
 }
 
 table {
@@ -32,7 +33,76 @@ table {
   color: transparent;
 }
 
-/* PokemonDetails.css */
+.search-input {
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 2rem;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* .pokemon-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+.pokemon-table {
+  width: 800px;
+  border-collapse: collapse; /* Eliminates space between borders */
+  margin: 0 auto; /* Adjust as needed */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #fff; /* Light background */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensures the border-radius applies if you have a border */
+}
+
+.pokemon-table th,
+.pokemon-table td {
+  padding: 12px 15px; /* Spacing within cells */
+  text-align: left; /* Aligns text to the left; adjust as needed */
+  font-size: 16px; /* Readable text size */
+}
+
+.pokemon-table thead {
+  background-color: #007bff; /* Theme color for headers */
+  color: #ffffff; /* Light text color for contrast */
+  font-weight: bold; /* Emphasizes header text */
+}
+
+.pokemon-table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Alternating row color for readability */
+}
+
+.pokemon-table tbody tr:hover {
+  background-color: #ddd; /* Hover effect for interactivity */
+  cursor: pointer; /* Indicates the row is interactable */
+}
+
+@media (max-width: 600px) {
+  .pokemon-table {
+    /* Responsive design adjustments */
+    display: block;
+    overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+  }
+}
+
 .pokemon-details {
   max-width: 800px;
   margin: 4rem auto;
